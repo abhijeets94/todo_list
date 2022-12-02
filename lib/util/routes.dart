@@ -1,25 +1,23 @@
-import 'package:flutter/material.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
-import 'package:todo_list/screens/add_task_screen.dart';
-import 'package:todo_list/screens/todo.dart';
+import 'package:provider/provider.dart';
+import 'package:todo_list/screens/homescreen.dart';
+import 'package:todo_list/screens/login_screen.dart';
 
-import '../screens/edit_task_screen.dart';
+import '../provider/user_provider.dart';
 
-generateRoute() {
+generateRoute({required BuildContext context}) {
   return [
     GetPage(
-      name: Todo.routeName,
-      page: () => Todo(),
+      name: "/",
+      page: () => Provider.of<UserProvider>(context).getUser.token.isNotEmpty
+          ? HomeScreen()
+          : const LoginScreen(),
     ),
     GetPage(
-      name: AddTaskScreen.routeName,
-      page: () => AddTaskScreen(),
-      transition: Transition.topLevel,
-    ),
-    GetPage(
-      name: EditTaskScreen.routeName,
-      page: () => EditTaskScreen(),
-      transition: Transition.topLevel,
+      name: HomeScreen.routeName,
+      page: () => HomeScreen(),
+      transition: Transition.fadeIn,
     ),
   ];
 }

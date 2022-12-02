@@ -24,10 +24,10 @@ class CustomTextField extends StatelessWidget {
           hintText: hintText,
           border: OutlineInputBorder(
               borderRadius: BorderRadius.circular(15),
-              borderSide: BorderSide(color: Colors.red)),
+              borderSide: const BorderSide(color: Colors.grey)),
           focusedBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(15),
-            borderSide: BorderSide(
+            borderSide: const BorderSide(
               color: Color.fromARGB(255, 245, 110, 101),
             ),
           ),
