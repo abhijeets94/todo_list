@@ -39,6 +39,7 @@ dependencies:
   shared_preferences: ^2.0.15
   glassmorphism: ^3.0.0
   sidebarx: ^0.14.0
+  provider: ^6.0.4
 
 dev_dependencies:
   flutter_test:
@@ -81,8 +82,7 @@ flutter:
   fonts:
     - family: NerkoOne-Regular
       fonts:
-        - asset: fonts/NerkoOne-Regular.ttf
-          style: regular
+        - asset: asset/fonts/NerkoOne-Regular.ttf
   #   - family: Trajan Pro
   #     fonts:
   #       - asset: fonts/TrajanPro.ttf

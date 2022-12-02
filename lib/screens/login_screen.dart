@@ -8,6 +8,7 @@ import 'package:todo_list/services/login_services.dart';
 import 'package:todo_list/util/custom_text_field.dart';
 
 class LoginScreen extends StatefulWidget {
+  static const routeName = "/login-screen";
   const LoginScreen({Key? key}) : super(key: key);
 
   @override

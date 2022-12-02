@@ -15,6 +15,11 @@ generateRoute({required BuildContext context}) {
           : const LoginScreen(),
     ),
     GetPage(
+      name: LoginScreen.routeName,
+      page: () => const LoginScreen(),
+      transition: Transition.fadeIn,
+    ),
+    GetPage(
       name: HomeScreen.routeName,
       page: () => HomeScreen(),
       transition: Transition.fadeIn,

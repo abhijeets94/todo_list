@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:glassmorphism/glassmorphism.dart';
 import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:sidebarx/sidebarx.dart';
 import 'package:todo_list/provider/user_provider.dart';
+import 'package:todo_list/screens/login_screen.dart';
 import 'package:todo_list/services/wallpaper_services.dart';
 
 import '../model/user.dart';
@@ -38,6 +41,7 @@ class _HomeScreenState extends State<HomeScreen> {
             color: Colors.white,
             fontSize: 40,
             fontWeight: FontWeight.w600,
+            fontFamily: "NerkoOne-Regular",
           ),
         ),
         backgroundColor: Color.fromARGB(255, 13, 41, 63),
@@ -97,25 +101,18 @@ class _HomeScreenState extends State<HomeScreen> {
             icon: Icons.home,
             label: 'Home',
             onTap: () {
-              debugPrint('Home');
+              Get.offAndToNamed(HomeScreen.routeName);
             },
           ),
-          const SidebarXItem(
-            icon: Icons.search,
-            label: 'Search',
-          ),
-          const SidebarXItem(
-            icon: Icons.people,
-            label: 'People',
-          ),
-          const SidebarXItem(
-            icon: Icons.favorite,
-            label: 'Favorites',
-          ),
-          const SidebarXItem(
-            iconWidget: FlutterLogo(size: 20),
-            label: 'Flutter',
-          ),
+          SidebarXItem(
+              icon: Icons.logout,
+              label: 'Logout',
+              onTap: () async {
+                Provider.of<UserProvider>(context, listen: false).removeUser();
+                SharedPreferences prefs = await SharedPreferences.getInstance();
+                prefs.setString("auth-value", "");
+                Get.offNamedUntil(LoginScreen.routeName, (route) => false);
+              }),
         ],
 
         //   child: GlassmorphicContainer(
