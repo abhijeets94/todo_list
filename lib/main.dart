@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
 import 'package:provider/provider.dart';
+import 'package:todo_list/constants/constant.dart';
 import 'package:todo_list/model/user.dart';
 import 'package:todo_list/provider/user_provider.dart';
 import 'package:todo_list/screens/homescreen.dart';
@@ -29,9 +30,9 @@ class _MyAppState extends State<MyApp> {
         return GetMaterialApp(
           title: 'Flutter Demo',
           theme: ThemeData(
-            useMaterial3: true,
-            primarySwatch: Colors.blue,
-          ),
+              useMaterial3: true,
+              primarySwatch: Colors.blue,
+              scaffoldBackgroundColor: scaffoldBackgroundColor),
           onInit: () => LoginServices().getUserData(context: context),
           initialRoute: "/",
           getPages: generateRoute(context: context),

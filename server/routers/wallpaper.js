@@ -18,3 +18,13 @@ wallpaperRoute.post("/post-wallpaper", async (req, res) => {
         res.status(500).json({error: err.message});
     }
 });
+wallpaperRoute.get("/get-wallpaper", async (req, res) => {
+    try { 
+        const wallpaper = await Wallpaper.find({});
+        res.json(wallpaper);
+    } catch (err) {
+        res.status(500).json({error: err.message});
+    }
+});
+
+module.exports = wallpaperRoute;

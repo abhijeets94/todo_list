@@ -18,10 +18,22 @@ class CustomTextField extends StatelessWidget {
       padding: const EdgeInsets.only(bottom: 8.0),
       child: TextField(
         controller: textEditingController,
+        style: const TextStyle(
+          color: Colors.white,
+          fontFamily: "NerkoOne-Regular",
+          fontSize: 20,
+          fontWeight: FontWeight.w500,
+        ),
         decoration: InputDecoration(
           filled: true,
           fillColor: Colors.black12,
           hintText: hintText,
+          hintStyle: const TextStyle(
+            color: Colors.white,
+            fontFamily: "NerkoOne-Regular",
+            fontSize: 20,
+            fontWeight: FontWeight.w100,
+          ),
           border: OutlineInputBorder(
               borderRadius: BorderRadius.circular(15),
               borderSide: const BorderSide(color: Colors.grey)),
