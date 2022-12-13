@@ -12,7 +12,7 @@ generateRoute({required BuildContext context}) {
     GetPage(
       name: "/",
       page: () => Provider.of<UserProvider>(context).getUser.token.isNotEmpty
-          ? HomeScreen()
+          ? const HomeScreen()
           : const LoginScreen(),
     ),
     GetPage(
@@ -22,7 +22,7 @@ generateRoute({required BuildContext context}) {
     ),
     GetPage(
       name: HomeScreen.routeName,
-      page: () => HomeScreen(),
+      page: () => const HomeScreen(),
       transition: Transition.fadeIn,
     ),
     GetPage(

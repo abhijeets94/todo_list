@@ -43,6 +43,7 @@ class WallpaperServices {
 
   getWallpaper() async {
     TaskController taskController = Get.find();
+
     http.Response response = await http.get(
         Uri.parse(
           "$url/get-wallpaper",

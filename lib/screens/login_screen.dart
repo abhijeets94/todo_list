@@ -1,14 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:provider/provider.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:sidebarx/sidebarx.dart';
 import 'package:todo_list/provider/user_provider.dart';
 import 'package:todo_list/screens/homescreen.dart';
 import 'package:todo_list/screens/upload_wall_screen.dart';
 import 'package:todo_list/services/login_services.dart';
 import 'package:todo_list/util/custom_sidebar.dart';
-import 'package:todo_list/util/custom_text_field.dart';
 
 import '../util/signin_signup.dart';
 
@@ -40,20 +37,14 @@ class _LoginScreenState extends State<LoginScreen>
   bool signUp = false;
 
   @override
-  void didChangeDependencies() {
-    // TODO: implement didChangeDependencies
-    super.didChangeDependencies();
-  }
-
-  @override
   Widget build(BuildContext context) {
-    final text = Theme.of(context).textTheme;
+    // final text = Theme.of(context).textTheme;
     SidebarXController sidebarXController =
         SidebarXController(selectedIndex: 0);
 
     return Provider.of<UserProvider>(context).getUser.token.isNotEmpty
         ? Provider.of<UserProvider>(context).getUser.userType == "user"
-            ? HomeScreen()
+            ? const HomeScreen()
             : const UploadWallpaperScreen()
         : Scaffold(
             body: Row(
@@ -66,7 +57,7 @@ class _LoginScreenState extends State<LoginScreen>
                       label: 'Login',
                     ),
                     SidebarXItem(
-                      icon: Icons.logout,
+                      icon: Icons.person,
                       label: 'Sign Up',
                     ),
                   ],

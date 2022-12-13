@@ -77,10 +77,10 @@ class LoginServices {
         response: response,
         context: context,
         onSuccess: () async {
-          final prefs = await SharedPreferences.getInstance();
-
           Provider.of<UserProvider>(context, listen: false)
               .setUser(response.body);
+          final prefs = await SharedPreferences.getInstance();
+
           await prefs.setString(
               'auth-token', json.decode(response.body)['token']);
 
@@ -121,6 +121,7 @@ class LoginServices {
             'auth-token': token,
           },
         );
+        // ignore: use_build_context_synchronously
         Provider.of<UserProvider>(context, listen: false)
             .setUser(userResponse.body);
       }

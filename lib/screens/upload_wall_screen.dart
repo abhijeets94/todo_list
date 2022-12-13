@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
+import 'package:image_downloader/image_downloader.dart';
 import 'package:provider/provider.dart';
 import 'package:todo_list/constants/constant.dart';
 import 'package:todo_list/controller/task_controller.dart';
 import 'package:todo_list/provider/user_provider.dart';
 import 'package:todo_list/services/wallpaper_services.dart';
 import 'package:todo_list/util/custom_text_field.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import '../model/wallpaper.dart';
 
@@ -29,13 +32,19 @@ class _UploadWallpaperScreenState extends State<UploadWallpaperScreen> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
+    taskController.wallList.value = [];
     fetchWallpaper();
   }
 
   void fetchWallpaper() async {
     await wallpaperServices.getWallpaper();
+  }
+
+  void _launchURL(Uri url) async {
+    if (!await launchUrl(url, mode: LaunchMode.platformDefault)) {
+      throw 'Could not launch $url ';
+    }
   }
 
   @override
@@ -97,9 +106,9 @@ class _UploadWallpaperScreenState extends State<UploadWallpaperScreen> {
                 ),
               ),
             ),
-          );
+          ).then((value) => setState(() {}));
         },
-        child: Icon(Icons.add_outlined),
+        child: const Icon(Icons.add_outlined),
       ),
       body: SafeArea(
         child: Column(
@@ -114,7 +123,9 @@ class _UploadWallpaperScreenState extends State<UploadWallpaperScreen> {
               ),
             ),
             Obx(() {
-              debugPrint("${taskController.wallList[0].wallpaperUrl}");
+              debugPrint("name 1${taskController.wallList[0].name}");
+              debugPrint(
+                  "name 2 ${Provider.of<UserProvider>(context).getUser.name}");
               return Expanded(
                 child: GridView.builder(
                     gridDelegate:
@@ -124,25 +135,60 @@ class _UploadWallpaperScreenState extends State<UploadWallpaperScreen> {
                     ),
                     itemCount: taskController.wallList.length,
                     itemBuilder: (context, index) {
-                      return Container(
-                        decoration: BoxDecoration(
-                          image: DecorationImage(
-                            image: NetworkImage(
-                              taskController.wallList[index].wallpaperUrl,
-                            ),
-                          ),
-                        ),
-                        child: Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                          child: Text(
-                            taskController.wallList[index].wallpaperName,
-                            style: const TextStyle(
-                                color: Colors.white,
-                                fontSize: 20,
-                                fontFamily: "NerkoOne-Regular"),
-                          ),
-                        ),
-                      );
+                      return taskController.wallList[0].name ==
+                              Provider.of<UserProvider>(context).getUser.name
+                          ? InkWell(
+                              onTap: () => _launchURL(Uri.parse(
+                                  taskController.wallList[index].wallpaperUrl)),
+                              onLongPress: () async {
+                                try {
+                                  // Saved with this method.
+                                  var imageId =
+                                      await ImageDownloader.downloadImage(
+                                          taskController
+                                              .wallList[index].wallpaperUrl);
+                                  if (imageId == null) {
+                                    return;
+                                  }
+
+                                  // Below is a method of obtaining saved image information.
+                                  var fileName =
+                                      await ImageDownloader.findName(imageId);
+                                  var path =
+                                      await ImageDownloader.findPath(imageId);
+                                  var size = await ImageDownloader.findByteSize(
+                                      imageId);
+                                  var mimeType =
+                                      await ImageDownloader.findMimeType(
+                                          imageId);
+                                } on PlatformException catch (error) {
+                                  print(error);
+                                }
+                              },
+                              child: Container(
+                                decoration: BoxDecoration(
+                                  image: DecorationImage(
+                                    image: NetworkImage(
+                                      taskController
+                                          .wallList[index].wallpaperUrl,
+                                    ),
+                                  ),
+                                ),
+                                child: Padding(
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 8.0),
+                                  child: Text(
+                                    taskController
+                                        .wallList[index].wallpaperName,
+                                    style: const TextStyle(
+                                        color: Colors.white,
+                                        fontSize: 20,
+                                        fontFamily: "NerkoOne-Regular"),
+                                  ),
+                                ),
+                              ),
+                            )
+                          : Container();
                     }),
               );
             }),

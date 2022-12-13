@@ -1,13 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:provider/provider.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:sidebarx/sidebarx.dart';
 
-import '../provider/user_provider.dart';
-import '../screens/homescreen.dart';
-import '../screens/login_screen.dart';
-
+// ignore: must_be_immutable
 class CustomSideBar extends StatelessWidget {
   CustomSideBar({
     Key? key,
@@ -25,22 +19,22 @@ class CustomSideBar extends StatelessWidget {
       theme: SidebarXTheme(
         margin: const EdgeInsets.all(10),
         decoration: BoxDecoration(
-          color: Color.fromARGB(255, 1, 30, 53),
+          color: const Color.fromARGB(255, 1, 30, 53),
           borderRadius: BorderRadius.circular(20),
         ),
-        hoverColor: Color.fromARGB(255, 13, 41, 63),
+        hoverColor: const Color.fromARGB(255, 13, 41, 63),
         textStyle: TextStyle(color: Colors.white.withOpacity(0.7)),
         selectedTextStyle: const TextStyle(color: Colors.white),
         itemTextPadding: const EdgeInsets.only(left: 30),
         selectedItemTextPadding: const EdgeInsets.only(left: 30),
         itemDecoration: BoxDecoration(
           borderRadius: BorderRadius.circular(10),
-          border: Border.all(color: Color.fromARGB(255, 1, 30, 53)),
+          border: Border.all(color: const Color.fromARGB(255, 1, 30, 53)),
         ),
         selectedItemDecoration: BoxDecoration(
           borderRadius: BorderRadius.circular(10),
           border: Border.all(
-            color: Color.fromARGB(255, 13, 41, 63).withOpacity(0.37),
+            color: const Color.fromARGB(255, 13, 41, 63).withOpacity(0.37),
           ),
           gradient: const LinearGradient(
             colors: [

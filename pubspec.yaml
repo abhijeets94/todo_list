@@ -40,6 +40,8 @@ dependencies:
   glassmorphism: ^3.0.0
   sidebarx: ^0.14.0
   provider: ^6.0.4
+  url_launcher: ^6.1.7
+  image_downloader: ^0.31.0
 
 dev_dependencies:
   flutter_test:

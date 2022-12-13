@@ -2,10 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
 import 'package:provider/provider.dart';
 import 'package:todo_list/constants/constant.dart';
-import 'package:todo_list/model/user.dart';
 import 'package:todo_list/provider/user_provider.dart';
-import 'package:todo_list/screens/homescreen.dart';
-import 'package:todo_list/screens/login_screen.dart';
 import 'package:todo_list/services/login_services.dart';
 import 'package:todo_list/util/routes.dart';
 

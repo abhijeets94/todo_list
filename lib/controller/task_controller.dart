@@ -1,21 +1,17 @@
-import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
-import 'package:todo_list/services/login_services.dart';
 
 import '../model/wallpaper.dart';
 
 class TaskController extends GetxController {
   var wallList = [].obs;
   RxInt i = 0.obs;
-  @override
   void addWallList({required Wallpaper wallpaper}) {
     wallList.add(wallpaper);
     update();
   }
 
-  void onReady() {
-    // TODO: implement onReady
+  // void onReady() {
 
-    super.onReady();
-  }
+  //   super.onReady();
+  // }
 }
